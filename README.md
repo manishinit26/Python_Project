@@ -94,7 +94,9 @@ The client will:
 
 ## Run the Streamlit application
 
+```powershell
 streamlit run app.py
+```
 
 ## REST API Endpoints
 
@@ -132,6 +134,7 @@ The scraper should return exactly 20 records from the main page of Books to Scra
 
 ## Streamlit Output 
 
+![Price vs Rating Scatter Plot](streamlit_output.png)
 
 
 ## Troubleshooting
