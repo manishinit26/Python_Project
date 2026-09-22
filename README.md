@@ -92,6 +92,10 @@ The client will:
 - Create `price_vs_rating.png`
 - Also create `price_vs_rating.svg` so the chart can be opened as text in the editor
 
+## Run the Streamlit application
+
+streamlit run app.py
+
 ## REST API Endpoints
 
 | Method | Endpoint | Description |
