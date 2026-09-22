@@ -142,3 +142,4 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 - The scraper only targets the first 20 books, as required by the project scope.
 - The database layer uses an object-oriented manager class for CRUD operations.
 - The project was validated end to end against the live site.
+
