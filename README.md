@@ -37,29 +37,108 @@ Python_Project/
 ├── requirements.txt       # (Optional) List of project dependencies
 └── README.md              # Project documentation
 
+## Setup
 
-## 💻 Complete Step-by-Step Setup Guide
+### 1. Create and activate a virtual environment
 
-Follow these instructions to set up the environment and run the pipeline from start to finish.
+On Windows PowerShell:
 
-### 1. Environment Setup
-Clone the repository and open the folder in your terminal (or VS Code). Initialize and activate a virtual environment.
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
 
-**Windows:**
-```bash
-python -m venv venv
-venv\Scripts\activate
+### 2. Install dependencies
+
+```powershell
+pip install -r requirements.txt
+```
+
+## How to Run the Project
+
+### 1. Scrape the data and populate the database
+
+```powershell
+python scraper.py
+```
+
+This creates or refreshes `books.db` and stores the first 20 books.
+
+### 2. Start the FastAPI server
+
+```powershell
+uvicorn main:app --reload
+```
+
+The API will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+### 3. Run the client script
+
+In a second terminal, while the API server is running:
+
+```powershell
+python client.py
+```
+
+The client will:
+
+- Call `GET /books`
+- Print the results as a Pandas DataFrame
+- Export `exported_books.csv`
+- Create `price_vs_rating.png`
+- Also create `price_vs_rating.svg` so the chart can be opened as text in the editor
+
+## REST API Endpoints
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| GET | `/books` | Retrieve all books |
+| GET | `/books/{id}` | Retrieve one book by ID |
+| POST | `/books` | Create a new book |
+| PUT | `/books/{id}` | Update an existing book |
+| DELETE | `/books/{id}` | Delete a book |
+
+### Example Book JSON
+
+```json
+{
+  "title": "A Light in the Attic",
+  "price": 51.77,
+  "in_stock": "In stock",
+  "rating": 3
+}
+```
+
+## Output Files
+
+After a successful run, you should see these generated files:
+
+- `books.db` - SQLite database
+- `exported_books.csv` - Clean CSV export from the API data
+- `price_vs_rating.png` - Scatter plot of price vs rating
+- `price_vs_rating.svg` - Editable text-based version of the plot
+
+## Expected Result
+
+The scraper should return exactly 20 records from the main page of Books to Scrape. The client should print a DataFrame showing those 20 rows, export the CSV, and save the scatter plot.
 
 
-## ⚙️ Execution Instructions
+## Troubleshooting
 
-This project requires running a backend server and frontend clients simultaneously using two separate terminal windows.
+- If the client says it cannot reach the API, make sure `uvicorn main:app --reload` is still running.
+- If `books.db` is empty, run `python scraper.py` again before starting the API.
+- If PowerShell blocks virtual environment activation, run PowerShell as a normal user and allow script execution for the session:
 
-### Phase 1: Initialize the Database (Terminal 1)
-Ensure your virtual environment is active. Run the database script to scrape the website and generate the `books.db` file.
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
 
-```bash
-python database.py
+## Notes
 
-Bash
-uvicorn main:app
+- The scraper only targets the first 20 books, as required by the project scope.
+- The database layer uses an object-oriented manager class for CRUD operations.
+- The project was validated end to end against the live site.
