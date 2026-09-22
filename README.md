@@ -59,7 +59,7 @@ pip install -r requirements.txt
 ### 1. Scrape the data and populate the database
 
 ```powershell
-python scraper.py
+python web_scraper.py
 ```
 
 This creates or refreshes `books.db` and stores the first 20 books.
@@ -81,7 +81,7 @@ http://127.0.0.1:8000
 In a second terminal, while the API server is running:
 
 ```powershell
-python client.py
+python Clients_Server.py
 ```
 
 The client will:
