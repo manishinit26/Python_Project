@@ -8,52 +8,58 @@
 
 A complete data engineering pipeline that extracts book data from the web, manages it in a local database using Object-Oriented Programming (OOP), exposes it via a custom REST API, and visualizes it through analytical client scripts and an interactive web dashboard.
 
-## 🚀 Project Overview
 
-This project bridges the gap between raw data collection and actionable data visualization. It utilizes the exact foundational architecture used by Data and AI Engineers to feed real-time data into analytics systems and machine learning models.
+## 🚀 Project Features
+* **Automated Web Scraping:** Extracts live book data (Title, Price, Availability, Rating) from `books.toscrape.com`.
+* **OOP Database Management:** Utilizes a custom Python class to handle full CRUD operations within an SQLite database.
+* **RESTful Microservice:** Deploys a FastAPI backend to securely expose the scraped data via standard HTTP endpoints.
+* **Data Analytics & Export:** Consumes API data using Pandas to generate CSV exports and Matplotlib for scatter plot visualizations.
+* **Interactive UI:** Features a Streamlit dashboard for real-time, browser-based data exploration.
 
-### Core Architecture
-1. **Web Scraping Engine:** Extracts live book data (Title, Price, Availability, and Rating) from `books.toscrape.com`.
-2. **Database Management (OOP):** Uses an SQLite database manager class to seamlessly handle full CRUD (Create, Read, Update, Delete) operations.
-3. **REST API Microservice:** Deploys a FastAPI server to securely expose the database via standardized HTTP endpoints (`GET`, `POST`, `PUT`, `DELETE`).
-4. **Analytics Client:** Consumes the API payload using Pandas to clean the data, exports it to a CSV, and generates a Price vs. Rating scatter plot using Matplotlib.
-5. **Interactive Web Dashboard:** A Streamlit application for dynamic, in-browser data visualization.
+## 🛠️ Technology Stack
+* **Language:** Python 3.x
+* **Data Extraction:** `requests`, `beautifulsoup4`
+* **Database:** `sqlite3` (Built-in)
+* **Backend API:** `fastapi`, `uvicorn`, `pydantic`
+* **Data Analytics:** `pandas`, `matplotlib`
+* **Frontend Web App:** `streamlit`
 
----
+## 📂 Project Structure
+```text
+Python_Project/
+│
+├── web_scraper.py         # Scrapes book records from the target website
+├── database.py            # Manages the SQLite schema and runs the scraper
+├── main.py                # Contains the FastAPI application and REST endpoints
+├── Clients_Sever.py       # Standalone client to fetch API data, generate CSV, and plot charts
+├── webapp.py              # Streamlit dashboard for interactive browser visualization
+│
+├── requirements.txt       # (Optional) List of project dependencies
+└── README.md              # Project documentation
 
-## 📂 Repository Structure
 
-* `web_scraper.py` — Web scraping script using BeautifulSoup.
-* `database.py` — Manages the SQLite schema and populates `books.db`.
-* `main.py` — The FastAPI microservice and REST endpoints.
-* `Clients_Sever.py` — Standalone client script to fetch API data, generate CSVs, and plot charts.
-* `webapp.py` — Streamlit dashboard for interactive UI visualization.
+## 💻 Complete Step-by-Step Setup Guide
 
----
+Follow these instructions to set up the environment and run the pipeline from start to finish.
 
-## 💻 Installation & Setup
+### 1. Environment Setup
+Clone the repository and open the folder in your terminal (or VS Code). Initialize and activate a virtual environment.
 
-**1. Clone the repository:**
+**Windows:**
 ```bash
-git clone [https://github.com/manishinit26/Python_Project.git](https://github.com/manishinit26/Python_Project.git)
-cd Python_Project
-
-2. Initialize and activate a virtual environment:
-Windows:
-
-Bash
 python -m venv venv
 venv\Scripts\activate
-macOS/Linux:
+
+
+## ⚙️ Execution Instructions
+
+This project requires running a backend server and frontend clients simultaneously using two separate terminal windows.
+
+### Phase 1: Initialize the Database (Terminal 1)
+Ensure your virtual environment is active. Run the database script to scrape the website and generate the `books.db` file.
+
+```bash
+python database.py
 
 Bash
-python3 -m venv venv
-source venv/bin/activate
-3. Install all required dependencies:
-
-Bash
-pip install requests beautifulsoup4 fastapi uvicorn pydantic pandas matplotlib streamlit
-
-
-
-
+uvicorn main:app
