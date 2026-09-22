@@ -126,6 +126,10 @@ After a successful run, you should see these generated files:
 
 The scraper should return exactly 20 records from the main page of Books to Scrape. The client should print a DataFrame showing those 20 rows, export the CSV, and save the scatter plot.
 
+## Streamlit Output 
+
+![Price vs Rating Scatter Plot](Screenshot 2026-09-22 141812.png)
+
 
 ## Troubleshooting
 
